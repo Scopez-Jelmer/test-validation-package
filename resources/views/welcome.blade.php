@@ -126,6 +126,26 @@
             text-transform: none
         }
 
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Create two equal columns that floats next to each other */
+        .column {
+            float: left;
+            width: 50%;
+            padding: 10px;
+            height: 300px;
+            /* Should be removed. Only for demonstration */
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
         [type=button],
         [type=reset],
         [type=submit],
@@ -615,6 +635,10 @@
             color: rgb(107 114 128 / var(--tw-text-opacity))
         }
 
+        .text-white {
+            color: #fff;
+        }
+
         .underline {
             -webkit-text-decoration-line: underline;
             text-decoration-line: underline
@@ -834,10 +858,28 @@
     <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
 
         <form method="POST" action="/submit-form">
-            @csrf
-            <label for="name" class="bg-white">Name:</label>
-            <input type="text" id="name" name="name"></input>
-            <input type="submit" value="Submit"></input>
+            <div class="row">
+                @csrf
+                <div class="column">
+                    <label for="name" class="text-white">Name:</label>
+                    <input type="text" id="name" name="name"></input>
+                </div>
+                <div class="column">
+                    <label for="age" class="text-white">Age:</label>
+                    <input type="number" id="age" name="age"></input>
+                </div>
+                <!-- Fix that a boolean get sent instead of string -->
+                <!-- <div class="column">
+                    <h2 class="text-white">Are you happy today?</h2>
+                    <label for="happiness" class="text-white">Yes:</label>
+                    <input type="radio" id="happiness-true" name="happiness" value=true></input>
+                </div>
+                <label for="happiness" class="text-white">No:</label>
+                <input type="radio" id="happiness-false" name="happiness" value=false></input>
+            </div> -->
+                <input type="submit" class="text-white" value="Submit"></input>
+            </div>
+
         </form>
     </div>
 </body>
